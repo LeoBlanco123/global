@@ -1,0 +1,69 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+	<title>Cadastro de Usuário</title>
+	<link rel="stylesheet" href="/css/Login/novo_usuario.css">
+</head>
+
+<body>
+<div class="container mt-4">
+	<div class="row">
+		<h1 class="mb-4 text-center">Cadastro de Usuario</h1>
+	</div>
+	<div class="row">
+		<div class="col-md-8 offset-md-2 form-container">
+			<form th:object="${usuario}" action="/inserir_usuario" method="post">
+
+				<!-- Nome -->
+				<div class="mb-3">
+					<label for="nome" class="form-label">Nome</label>
+					<input type="text" id="nome" th:field="*{nome}" class="form-control" th:errorclass="is-invalid" required/>
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">Nome inválido</div>
+				</div>
+
+				<!-- Username -->
+				<div class="mb-3">
+					<label for="username" class="form-label">Email</label>
+					<input type="text" id="username" th:field="*{username}" class="form-control" th:errorclass="is-invalid" required/>
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username inválido</div>
+				</div>
+
+				<!-- Senha -->
+				<div class="mb-3">
+					<label for="password" class="form-label">Senha</label>
+					<input type="password" id="password" th:field="*{password}" class="form-control" th:errorclass="is-invalid" required/>
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Senha inválida</div>
+				</div>
+
+				<!-- Permissões -->
+				<div class="mb-3">
+					<label for="permissoes" class="form-label" >Permissões</label>
+					<select class="form-select" id="permissoes" name="var_role">
+						<option th:each="role : ${roles}"
+								th:value="${role.id}"
+								th:text="${role.nome}"></option>
+					</select>
+					<div class="invalid-feedback" th:if="${#fields.hasErrors('roles')}" th:errors="*{roles}"></div>
+				</div>
+
+				<div>
+					<input type="hidden" name="_csrf" th:value="${_csrf.token}" >
+				</div>
+
+				<!-- Botões -->
+				<div class="d-grid gap-2 mt-4">
+					<button type="submit" class="btn btn-primary">Cadastrar</button>
+					<a class="btn btn-secondary mt-2" th:href="@{/empresas}">Cancelar</a>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>

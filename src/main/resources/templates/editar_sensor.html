@@ -1,0 +1,53 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Sensor</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Cadastro de Sensor</h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 form-container">
+                <form th:action="@{/sensores/{id}/editar(id=${sensor.id})}" th:object="${sensor}" method="post">
+
+                <!-- Tipo -->
+                <div class="mb-3">
+                    <label for="tipo" class="form-label">Tipo do Sensor</label>
+                    <input type="text" class="form-control" id="tipo" th:field="*{tipo}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('tipo')}" th:errors="*{tipo}"></div>
+                </div>
+
+                <!-- Localização -->
+                <div class="mb-3">
+                    <label for="localizacao" class="form-label">Localização</label>
+                    <input type="text" class="form-control" id="localizacao" th:field="*{localizacao}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('localizacao')}" th:errors="*{localizacao}"></div>
+                </div>
+
+                <!-- Leitura Atual -->
+                <div class="mb-3">
+                    <label for="leituraAtual" class="form-label">Leitura Atual</label>
+                    <input type="number" class="form-control" id="leituraAtual" th:field="*{leituraAtual}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('leituraAtual')}" th:errors="*{leituraAtual}"></div>
+                </div>
+
+                <!-- Campo oculto para Empresa -->
+                <input type="hidden" th:field="*{empresa.id}">
+
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-secondary mt-2" th:href="@{/empresas/{id}/detalhes(id=${sensor.empresa.id})}">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

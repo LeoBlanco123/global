@@ -1,0 +1,61 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Meta Ambiental</title>
+    <link rel="stylesheet" href="/css/syles.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h1 class="mb-4 text-center">Meta Ambiental</h1>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 form-container">
+            <form th:action="@{/metas/salvar}" th:object="${metaAmbiental}" method="post">
+
+                <!-- Descrição -->
+                <div class="mb-3">
+                    <label for="descricao" class="form-label">Descrição da meta ambiental</label>
+                    <input type="text" class="form-control" id="descricao" th:field="*{descricao}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('descricao')}" th:errors="*{descricao}"></div>
+                </div>
+
+                <!-- Redução de Emissão -->
+                <div class="mb-3">
+                    <label for="reducaoEmissao" class="form-label">Redução de emissão de carbono (em %)</label>
+                    <input type="number" class="form-control" id="reducaoEmissao" th:field="*{reducaoEmissao}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('reducaoEmissao')}" th:errors="*{reducaoEmissao}"></div>
+                </div>
+
+                <!-- Redução de Água -->
+                <div class="mb-3">
+                    <label for="reducaoAgua" class="form-label">Redução no uso de água (em %)</label>
+                    <input type="number" class="form-control" id="reducaoAgua" th:field="*{reducaoAgua}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('reducaoAgua')}" th:errors="*{reducaoAgua}"></div>
+                </div>
+
+                <!-- Redução de Energia -->
+                <div class="mb-3">
+                    <label for="reducaoEnergia" class="form-label">Redução no consumo de energia (em %)</label>
+                    <input type="number" class="form-control" id="reducaoEnergia" th:field="*{reducaoEnergia}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('reducaoEnergia')}" th:errors="*{reducaoEnergia}"></div>
+                </div>
+
+                <!-- Campo oculto para Empresa -->
+                <input type="hidden" th:field="*{empresa.id}">
+
+                <!-- Botões -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-secondary mt-2" th:href="@{/empresas/{id}/detalhes(id=${metaAmbiental.empresa.id})}">Cancelar</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

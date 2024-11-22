@@ -1,0 +1,59 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-spring4-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Cadastrar Nova Empresa</title>
+    <link rel="stylesheet" href="/css/syles.css">
+</head>
+<body>
+<div class="container mt-5">
+    <div class="row">
+        <h1 class="mb-4 text-center">Cadastrar Nova Empresa</h1>
+    </div>
+    <div class="row">
+        <div class="col-md-8 offset-md-2 form-container">
+            <form th:action="@{/empresas/salvar}" th:object="${empresa}" method="post">
+
+                <!-- Nome da Empresa -->
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Qual é o nome da empresa?</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{nome}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></div>
+                </div>
+
+                <!-- Setor -->
+                <div class="mb-3">
+                    <label for="setor" class="form-label">Qual é o setor da empresa?</label>
+                    <input type="text" class="form-control" id="setor" th:field="*{setor}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('setor')}" th:errors="*{setor}"></div>
+                </div>
+
+                <!-- Localização -->
+                <div class="mb-3">
+                    <label for="localizacaoGeografica" class="form-label">Onde a empresa está localizada?</label>
+                    <input type="text" class="form-control" id="localizacaoGeografica" th:field="*{localizacaoGeografica}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('localizacaoGeografica')}" th:errors="*{localizacaoGeografica}"></div>
+                </div>
+
+                <!-- Carbono -->
+                <div class="mb-3">
+                    <label for="carbono" class="form-label">Qual é a emissão de carbono da empresa?</label>
+                    <input type="text" class="form-control" id="carbono" th:field="*{carbonoAtual}" th:errorclass="is-invalid"/>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('carbonoAtual')}" th:errors="*{carbonoAtual}"></div>
+                </div>
+
+                <!-- Botão Salvar -->
+                <div class="d-grid">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn btn-secondary mt-2" th:href="@{/empresas}">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="pt" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="/css/Detalhes_Empresa/detalhes_empresas.css">
+</head>
+
+<script>
+    function confirmarRemocao1() {
+        const message = document.getElementById('confirmMessage1').innerText;
+        return confirm(message);
+    }
+    function confirmarRemocao2() {
+        const message = document.getElementById('confirmMessage2').innerText;
+        return confirm(message);
+    }
+    function confirmarRemocao3() {
+        const message = document.getElementById('confirmMessage3').innerText;
+        return confirm(message);
+    }
+    function confirmarRemocao4() {
+        const message = document.getElementById('confirmMessage4').innerText;
+        return confirm(message);
+    }
+</script>
+
+
+<body>
+<div class="container">
+    <h1 class="center-align"></h1>
+
+    <!-- Informações Gerais -->
+    <div class="card info-geral">
+        <div class="card-content">
+            <span class="card-title">
+                <i class="material-icons left">info_outline</i>
+                <strong>Informações Gerais</strong>
+            </span>
+            <div class="info-row">
+                <strong>Nome:</strong> <span th:text="${empresa.nome}"></span>
+            </div>
+            <div class="info-row">
+                <strong>Setor:</strong> <span th:text="${empresa.setor}"></span>
+            </div>
+            <div class="info-row">
+                <strong>Localização:</strong> <span th:text="${empresa.localizacaoGeografica}"></span>
+            </div>
+            <div class="info-row">
+                <strong>Carbono Atual:</strong> <span th:text="${empresa.carbonoAtual}"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Análise de Impacto e Meta Ambiental -->
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <i class="material-icons left">assessment</i>
+                        <strong>Análise de Impacto</strong>
+                    </span>
+                    <div class="row" th:each="analise : ${empresa.analise}">
+                        <div class="col s12">
+                            <div class="card small blue-grey lighten-4">
+                                <div class="card-content">
+                                    <div class="info-row">
+                                        <strong>Recomendações:</strong> <span th:text="${analise.recomendacoes}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Metas:</strong> <span th:text="${analise.cumprimentoMetas}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Progresso:</strong> <span th:text="${analise.progressoPegadaCarbono}"></span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <div>
+                                        <a class="btn-small orange" th:href="@{/analise/{id}/editar(id=${analise.id})}">Editar</a>
+                                    </div>
+                                    <div>
+                                        <form th:action="@{/analise/{id}/remover(id=${analise.id})}" method="post">
+                                            <span id="confirmMessage1" style="display: none;"></span>
+                                            <button type="submit" class="btn-small red" onclick="return confirmarRemocao1();">Remover</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn green" th:if="${showCreateButtonAnalise}" th:href="@{/analise/nova(idEmpresa=${empresa.id})}">Criar Análise de Impacto</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <i class="material-icons left">trending_up</i>
+                        <strong>Meta Ambiental</strong>
+                    </span>
+                    <div class="row" th:each="meta : ${empresa.meta}">
+                        <div class="col s12">
+                            <div class="card small yellow lighten-4">
+                                <div class="card-content">
+                                    <div class="info-row">
+                                        <strong>Descrição:</strong> <span th:text="${meta.descricao}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Redução Agua:</strong> <span th:text="${meta.reducaoAgua}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Redução Emissao:</strong> <span th:text="${meta.reducaoEmissao}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Redução Energia:</strong> <span th:text="${meta.reducaoEnergia}"></span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <div>
+                                        <a class="btn-small orange" th:href="@{/metas/{id}/editar(id=${meta.id})}">Editar</a>
+                                    </div>
+                                    <div>
+                                        <form th:action="@{/metas/{id}/remover(id=${meta.id})}" method="post">
+                                            <span id="confirmMessage2" style="display: none;"></span>
+                                            <button type="submit" class="btn-small red" onclick="return confirmarRemocao2();">Remover</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn green" th:if="${showCreateButtonMetas}" th:href="@{/metas/nova(idEmpresa=${empresa.id})}">Criar Meta Ambiental</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Relatorios e Sensor -->
+    <div class="row">
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <i class="material-icons left">folder</i>
+                        <strong>Relatorio</strong>
+                    </span>
+                    <div class="row" th:each="relatorio : ${empresa.relatorios}">
+                        <div class="col s12">
+                            <div class="card small teal lighten-4">
+                                <div class="card-content">
+                                    <div class="info-row">
+                                        <strong>Emissão Gas:</strong> <span th:text="${relatorio.emissaoGases}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Energia Consumida:</strong> <span th:text="${relatorio.energiaConsumida}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Agua Consumida:</strong> <span th:text="${relatorio.usoAgua}"></span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <div>
+                                        <a class="btn-small orange" th:href="@{/relatorios/{id}/editar(id=${relatorio.id})}">Editar</a>                                    </div>
+                                    <div>
+                                        <form th:action="@{/relatorios/{id}/remover(id=${relatorio.id})}" method="post">
+                                            <span id="confirmMessage3" style="display: none;"></span>
+                                            <button type="submit" class="btn-small red" onclick="return confirmarRemocao3();">Remover</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn green" th:if="${showCreateButtonRelatorios}" th:href="@{/relatorios/novo(idEmpresa=${empresa.id})}">Criar Relatorio</a>                </div>
+            </div>
+        </div>
+
+        <div class="col s12 m6">
+            <div class="card">
+                <div class="card-content">
+                    <span class="card-title">
+                        <i class="material-icons left">device_hub</i>
+                        <strong>Sensor</strong>
+                    </span>
+                    <div class="row" th:each="sensor : ${empresa.sensor}">
+                        <div class="col s12">
+                            <div class="card small light-blue lighten-4">
+                                <div class="card-content">
+                                    <div class="info-row">
+                                        <strong>Tipo:</strong> <span th:text="${sensor.tipo}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Localizacão:</strong> <span th:text="${sensor.localizacao}"></span>
+                                    </div>
+                                    <div class="info-row">
+                                        <strong>Leitura:</strong> <span th:text="${sensor.leituraAtual}"></span>
+                                    </div>
+                                </div>
+                                <div class="card-action">
+                                    <div>
+                                        <a class="btn-small orange" th:href="@{/sensores/{id}/editar(id=${sensor.id})}">Editar</a>
+                                    </div>
+                                    <div>
+                                        <form th:action="@{/sensores/{id}/remover(id=${sensor.id})}" method="post">
+                                            <span id="confirmMessage4" style="display: none;"></span>
+                                            <button type="submit" class="btn-small red" onclick="return confirmarRemocao4();">Remover</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <a class="btn green" th:if="${showCreateButtonSensores}" th:href="@{/sensores/novo(idEmpresa=${empresa.id})}">Criar Sensor</a>
+                </div>
+            </div>
+        </div>
+        <a class="btn btn-small" th:href="@{/empresas}" >Voltar</a>
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+</html>

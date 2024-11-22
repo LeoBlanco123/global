@@ -1,0 +1,132 @@
+/* Estilo geral */
+body {
+    background-color: #f8f9fa;
+    font-family: 'Arial', sans-serif;
+    color: #343a40;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #007bff;
+}
+
+.navbar .navbar-brand {
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.navbar .nav-link {
+    color: #ffffff;
+    margin: 0 10px;
+    font-size: 1.1rem;
+}
+
+.navbar .nav-link:hover {
+    color: #d4d4d4;
+    text-decoration: underline;
+}
+
+/* Header do conteúdo principal */
+h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #007bff;
+    margin-bottom: 20px;
+}
+
+/* Card */
+.card {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-top: 20px;
+    padding: 20px;
+}
+
+/* Tabela */
+.table {
+    margin-bottom: 0;
+    border-collapse: collapse;
+}
+
+.table th {
+    background-color: #007bff;
+    color: #ffffff;
+    text-align: left;
+    padding: 12px;
+    font-size: 1.1rem;
+}
+
+.table tbody tr:hover {
+    background-color: #e9ecef;
+}
+
+.table td {
+    padding: 10px;
+    font-size: 1rem;
+}
+
+/* Botões */
+.btn {
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-info {
+    background-color: #17a2b8;
+    border-color: #17a2b8;
+    color: #ffffff;
+}
+
+.btn-info:hover {
+    background-color: #138496;
+}
+
+.btn-warning {
+    background-color: #ffc107;
+    border-color: #ffc107;
+    color: #ffffff;
+}
+
+.btn-warning:hover {
+    background-color: #e0a800;
+}
+
+.btn-danger {
+    background-color: #dc3545;
+    border-color: #dc3545;
+    color: #ffffff;
+}
+
+.btn-danger:hover {
+    background-color: #bd2130;
+}
+
+/* Mensagem de confirmação */
+#confirmMessage {
+    display: none;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .navbar .navbar-brand {
+        font-size: 1.25rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    .btn {
+        font-size: 0.85rem;
+        padding: 4px 8px;
+    }
+
+    .table th, .table td {
+        font-size: 0.9rem;
+    }
+}
